@@ -1,0 +1,15 @@
+python opensora/eval/eval_common_metric.py \
+    --real_video_dir "/home/aiops/zhangfz/content-debiased-fvd/mira_video"\
+    --generated_video_dir "/home/aiops/zhangfz/Memory/results/base_length_16_ds_size_500_batch_size_8_lr_1e-06_uncond_prob_0.1_n_gpu_8_prompt_type_full/0" \
+    --batch_size 10 \
+    --num_frames 16 \
+    --device 'cuda' \
+    --metric 'fvd' \
+    --fvd_method 'styleganv'
+
+
+bash scripts/eval/fvd_calculation.sh
+
+python -m ipdb -c continue -m scripts.eval.clip_calculate
+
+DEBUGPY=1 python scripts/eval/clip_calculate.py
